@@ -15,10 +15,10 @@ function randomCard() {
   let randomNumber = Math.floor(Math.random() * 13) + 1;
   if (randomNumber > 10) {
     return 10;
-  } else if (randomCard === 1) {
+  } else if (randomNumber === 1) {
     return 11;
   } else {
-    return randomCard;
+    return randomNumber;
   }
 }
 
