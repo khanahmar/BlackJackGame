@@ -1,21 +1,39 @@
 let massageEl = document.getElementById("massage-el");
 let sumEl = document.getElementById("sum");
 let cardEl = document.getElementById("card");
+let greeting = document.getElementById("greeting");
 
-let firstCard = 11;
-let secondCard = 10;
-let card = [firstCard, secondCard];
+let firstCard = randomCard();
+let secondCard = randomCard();
+let cards = [firstCard, secondCard];
 let blackjack = false;
 let isAlive = true;
 let massage = "";
-
 let sum = firstCard + secondCard;
+
+function randomCard() {
+  let randomNumber = Math.floor(Math.random() * 13) + 1;
+  if (randomNumber > 10) {
+    return 10;
+  } else if (randomCard === 1) {
+    return 11;
+  } else {
+    return randomCard;
+  }
+}
 
 function startGame() {
   renderGame();
 }
 
 function renderGame() {
+  cardEl.innerText = `Card :`;
+  for (let i = 0; i < cards.length; i++) {
+    cardEl.innerText += ` ${cards[i]}`;
+  }
+
+  sumEl.innerText = `Sum : ${sum}`;
+
   if (sum <= 20) {
     massage = "Do you want to draw a new card? 😊";
   } else if (sum === 21) {
@@ -26,12 +44,11 @@ function renderGame() {
     isAlive = false;
   }
   massageEl.innerText = massage;
-  sumEl.innerText = `Sum : ${sum}`;
-  cardEl.innerText = `Card : ${card[0]} ${card[1]}`;
 }
 
 function newCard() {
-  let card = 5;
+  let card = randomCard();
   sum += card;
+  cards.push(card);
   renderGame();
 }
