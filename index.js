@@ -3,13 +3,11 @@ let sumEl = document.getElementById("sum");
 let cardEl = document.getElementById("card");
 let greeting = document.getElementById("greeting");
 
-let firstCard = randomCard();
-let secondCard = randomCard();
-let cards = [firstCard, secondCard];
+let cards = [];
 let blackjack = false;
-let isAlive = true;
+let isAlive = false;
 let massage = "";
-let sum = firstCard + secondCard;
+let sum = 0;
 
 function randomCard() {
   let randomNumber = Math.floor(Math.random() * 13) + 1;
@@ -27,6 +25,12 @@ function startGame() {
 }
 
 function renderGame() {
+  isAlive = true;
+  let firstCard = randomCard();
+  let secondCard = randomCard();
+  cards = [firstCard, secondCard];
+  sum = firstCard + secondCard;
+
   cardEl.innerText = `Card :`;
   for (let i = 0; i < cards.length; i++) {
     cardEl.innerText += ` ${cards[i]}`;
