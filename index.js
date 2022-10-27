@@ -4,18 +4,22 @@ let sumEl = document.getElementById("sum");
 let cardEl = document.getElementById("card");
 let greeting = document.getElementById("greeting");
 let playerEl = document.getElementById("player-el");
+
 // Assigning Values
 let cards = [];
 let blackjack = false;
 let isAlive = false;
 let massage = "";
 let sum = 0;
+let addingCard = false;
+
 // Making an Object
 let player = {
-  name: "ahmar",
-  chip: 200,
+  name: "Ahmar",
+  chip: 100,
 };
 playerEl.innerHTML = `${player.name} : $${player.chip}`;
+
 // Function of random card
 function randomCard() {
   let randomNumber = Math.floor(Math.random() * 13) + 1;
@@ -27,6 +31,7 @@ function randomCard() {
     return randomNumber;
   }
 }
+
 // Function of starting game
 function startGame() {
   isAlive = true;
@@ -34,9 +39,9 @@ function startGame() {
   let secondCard = randomCard();
   cards = [firstCard, secondCard];
   sum = firstCard + secondCard;
-
   renderGame();
 }
+
 // Function of rendering game
 function renderGame() {
   cardEl.innerHTML = `Card :`;
@@ -54,15 +59,17 @@ function renderGame() {
     massage = "Your are out of the game! 😭";
     isAlive = false;
   }
-
   massageEl.innerText = massage;
 }
+
 // Function of new card
 function newCard() {
   if (isAlive === true && blackjack === false) {
     let card = randomCard();
     sum += card;
     cards.push(card);
+    player.chip -= 50;
+    playerEl.innerHTML = `${player.name} : $${player.chip}`;
     renderGame();
   }
 }
